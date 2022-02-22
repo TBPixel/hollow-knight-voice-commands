@@ -6,6 +6,8 @@ A fun little tool to play Hollow Knight with only voice commands.
 
 Download the latest build from releases. When you run for the first time it will generate a `config.yaml` file in the same directory. You can edit this file to change the default keybinds and command text, or use the defaults.
 
+*Note:* Some special keyboard characters like `[` will need to be wrapped in quotes in the config. For example, `'['`.
+
 ## Development
 
 Run with
