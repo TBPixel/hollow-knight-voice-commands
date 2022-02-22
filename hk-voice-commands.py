@@ -80,6 +80,9 @@ async def handle_input(config: dict, mic_text: str):
     if commands['dash'] in mic_text:
         task = asyncio.create_task(tap_key(keybinds['dash']))
         inputs.append(task)
+    if commands['super_dash'] in mic_text:
+        task = asyncio.create_task(press_and_hold_key(keybinds['super_dash'], 1.0))
+        inputs.append(task)
     if commands['nail'] in mic_text:
         task = asyncio.create_task(mash_key(keybinds['nail'], 1.0))
         inputs.append(task)
@@ -125,6 +128,7 @@ keybinds:
   right: right
   nail: x
   dash: c
+  super_dash: s
   cast: f
   focus: a
   load_save_state: '['
@@ -141,6 +145,7 @@ commands:
   jump_small: hop
   jump_large: jump
   dash: dash
+  super_dash: crystal heart
   nail: nail
   cast: cast
   focus: focus
