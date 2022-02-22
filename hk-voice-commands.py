@@ -10,8 +10,6 @@ FRAMERATE = 60
 # FRAMETIME defines the time between each frame
 FRAMETIME = 1 / FRAMERATE
 
-mic_text = ""
-
 async def reset_timer(config: dict):
     keybind: str = config['keybinds']['livesplit_timer']
     pyautogui.press(keybind)
@@ -57,7 +55,7 @@ def movement_duration(text: str, config: dict) -> float:
     return duration
 
 # handle the input from speech
-async def handle_input(config: dict):
+async def handle_input(config: dict, mic_text: str):
     inputs = []
     keybinds: dict = config['keybinds']
     commands: dict = config['commands']
@@ -103,7 +101,7 @@ async def handle_input(config: dict):
     await asyncio.gather(*inputs)
 
 
-async def handle_mic(r: sr.Recognizer, source: sr.Microphone):
+async def handle_mic(r: sr.Recognizer, source: sr.Microphone) -> str:
     # wait for a second to let the recognizer
     # adjust the energy threshold based on
     # the surrounding noise level
@@ -112,10 +110,12 @@ async def handle_mic(r: sr.Recognizer, source: sr.Microphone):
     # listens for the user's input
     audio2 = r.listen(source, phrase_time_limit=2.5)
 
-    # Using ggogle to recognize audio
+    # Using google to recognize audio
     mic_text = r.recognize_google(audio2)
     mic_text = mic_text.lower()
-    print("You said: " + mic_text)
+    print(mic_text)
+
+    return mic_text
 
 
 config_template_yaml = """
@@ -166,7 +166,8 @@ async def main():
         print(i)
         await asyncio.sleep(1)
     
-    print("Go!!!")
+    print("Go!")
+    print("Parsed mic text below:")
 
     # Loop infinitely for user to speak
     while(True):
@@ -175,7 +176,8 @@ async def main():
         try:
             # use the microphone as source for input.
             with sr.Microphone() as source:
-                await asyncio.gather(handle_input(config), handle_mic(r, source), return_exceptions=True)
+                mic_text = await handle_mic(r, source)
+                await handle_input(config, mic_text)
 
         except sr.RequestError as e:
             print("Could not request results; {0}".format(e))

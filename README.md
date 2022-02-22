@@ -10,16 +10,31 @@ Download the latest build from releases. When you run for the first time it will
 
 ## Development
 
+Clone the repository, cd inside and setup your virtual environment.
+
+```shell
+git clone git@github.com:TBPixel/hollow-knight-voice-commands.git
+cd hollow-knight-voice-commands
+python -m venv .
+./Scripts/activate
+```
+
+You'll need `pipwin` to get pyaudio setup.
+
+```shell
+pip install pipwin
+pipwin install pyaudio
+```
+
 Run with
 
 ```shell
-./Scripts/activate
 pip install -r requirements.txt
-python ./speech-to-text.py
+python ./hk-voice-commands.py
 ```
 
 Build with
 
 ```shell
-pyinstaller --onefile ./speech-to-text.py
+pyinstaller --onefile ./hk-voice-commands.py
 ```
