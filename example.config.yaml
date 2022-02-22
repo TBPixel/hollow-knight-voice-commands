@@ -1,0 +1,27 @@
+commands:
+  cast: cast
+  dash: dash
+  focus: focus
+  jump_large: jump
+  jump_small: hop
+  left: left
+  load_save_state: here we go again
+  move_extend:
+    large: uber
+    medium: long long
+    small: long
+  nail: nail
+  panic: panic
+  right: right
+  turn_left: west
+  turn_right: east
+keybinds:
+  cast: f
+  dash: c
+  focus: a
+  jump: z
+  left: left
+  livesplit_timer: '-'
+  load_save_state: '['
+  nail: x
+  right: right
